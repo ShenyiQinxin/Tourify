@@ -1,0 +1,29 @@
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.datasource.url: jdbc:mysql://localhost:3306?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username: root
+spring.datasource.password: password
+
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+spring.data.rest.base-path: /api
+
+twitter-to-kafka:
+  twitter-keywords:
+    - tours
+    - travel
+    - ghost
+  enable-v2-tweets: true
+  twitter-v2-stream-url: https://api.twitter.com/2/tweets/search/stream?tweet.fields=created_at&expansions=author_id
+  twitter-v2-rules-base-url: https://api.twitter.com/2/tweets/search/stream/rules
+  twitter-v2-recent-tweets-url: https://api.twitter.com/2/tweets/search/recent
+  twitter-query: (alexandria ghost) -is:retweet
+  twitter-fields:
+    - author_id
+    - created_at
+    - entities
+    - geo
+    - in_reply_to_user_id
+    - lang
+    - possibly_sensitive
+    - referenced_tweets
+    - source
+  twitter-v2-bearer-token: ${TWITTER_BEARER_TOKEN}
